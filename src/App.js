@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import Note from './components/Note'
+import Header from './components/Header'
+import Form from './components/Form'
+import NoteList from './components/NoteList'
 
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes) // creating notes entity
@@ -25,25 +27,13 @@ const App = (props) => {
 
   const handleNoteChange = (event) => setNewNote(event.target.value)
 
-  // function that shows either all notes or important ones, if button return 'important' function returns only important notes and vice versa
-  const notesToShow = showAll ? notes : notes.filter(note => note.important === true)
+
 
   return (
     <div>
-      <h1>Notes</h1>
-      <div className='notes-form-container'>
-        <form onSubmit={addNote} className='notes-form'>
-          <input value={newNote} onChange={handleNoteChange} placeholder={'text'} />
-          <input checked={isImportant} onChange={() => setImportant(prev => !prev)} value={isImportant} type='checkbox' />
-          <button type='submit'>save</button>
-        </form>
-        <button onClick={() => setShowAll(!showAll)}>show {showAll ? 'important' : 'all'}</button>
-      </div>
-      <ul>
-        {notesToShow.map(note =>
-          <Note key={note.id} note={note} />
-        )}
-      </ul>
+      <Header text='Notes' />
+      <Form addNote={addNote} newNote={newNote} handleNoteChange={handleNoteChange} isImportant={isImportant} setImportant={setImportant} setShowAll={setShowAll} showAll={showAll} />
+      <NoteList showAll={showAll} notes={notes} />
     </div>
   )
 }
