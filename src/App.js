@@ -27,10 +27,8 @@ const App = (props) => {
 
   const handleNoteChange = (event) => setNewNote(event.target.value)
 
-
-
   return (
-    <div>
+    <div className='notes-container'>
       <Header text='Notes' />
       <Form addNote={addNote} newNote={newNote} handleNoteChange={handleNoteChange} isImportant={isImportant} setImportant={setImportant} setShowAll={setShowAll} showAll={showAll} />
       <NoteList showAll={showAll} notes={notes} />
