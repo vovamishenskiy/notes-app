@@ -34,10 +34,18 @@
 }
 
 .notes-list-item {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row-reverse;
   padding: 0.5em;
   margin: 0.5em;
   background: lightgray;
   border-radius: 12px;
+}
+
+.notes-list-item span {
+  width: 90%;
 }
 
 .notes-container button {
@@ -55,4 +63,21 @@
 .form-text-input {
   font-size: 15px;
   font-family: 'Roboto', sans-serif;
+}
+
+.item-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  float: right;
+  height: 25px!important;
+  width: 25px!important;
+  padding: 0;
+  border-radius: 4px!important;
+}
+
+.item-btn svg {
+  fill: white;
+  width: 100%;
 }
