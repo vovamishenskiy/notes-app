@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-const Note = ({ note }) => {
+const Note = ({ note, deleteNote }) => {
     const [isShownBtn, setIsShownBtn] = useState(false)
     const [isShownPopup, setIsShownPopup] = useState(false)
-    const [isShownNote, setIsShownNote] = useState(true)
+    const [isShownNote] = useState(true)
 
     return (
         <div className='note-item-container'>
@@ -21,7 +21,7 @@ const Note = ({ note }) => {
             {isShownPopup &&
                 <div className='item-popup' onMouseLeave={() => setIsShownPopup(false)}>
                     <span>Note settings</span>
-                    <button onClick={() => setIsShownNote(false)}>delete</button>
+                    <button onClick={() => deleteNote(note.id)}>delete</button>
                     <button>move</button>
                 </div>
             }
@@ -29,4 +29,4 @@ const Note = ({ note }) => {
     )
 }
 
-export default Note
+export default Note 
