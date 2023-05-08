@@ -4,6 +4,10 @@ body {
   background-color: #FFF3EE;
 }
 
+h1 {
+  margin: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -152,4 +156,11 @@ body {
   height: auto;
   border-radius: 10px;
   padding: 6px 20px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0.5em;
 }
