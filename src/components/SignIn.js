@@ -7,24 +7,15 @@ const SignIn = () => {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleLoginChange = event => {
-    setLogin(event.target.value)    
-  }
-
-  const handlePasswordChange = event => {
-    setPassword(event.target.value)
-  }
+  const handleLoginChange = event => setLogin(event.target.value)
+  const handlePasswordChange = event => setPassword(event.target.value)
 
   const handleLoginClick = event => {
-    event.preventDefault();
     if(login.trim().length === 0 || password.trim().length === 0) return alert('enter your login or password')
     setSignInClick(true)
   }
 
-  const handleSignUpClick = event => {
-    event.preventDefault();
-    setSignUpClick(true)
-  }
+  const handleSignUpClick = () => setSignUpClick(true)
 
   return (
     <div className="signin-container">
