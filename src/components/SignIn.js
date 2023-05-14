@@ -10,7 +10,7 @@ const SignIn = () => {
   const handleLoginChange = event => setLogin(event.target.value)
   const handlePasswordChange = event => setPassword(event.target.value)
 
-  const handleLoginClick = event => {
+  const handleLoginClick = () => {
     if(login.trim().length === 0 || password.trim().length === 0) return alert('enter your login or password')
     setSignInClick(true)
   }
