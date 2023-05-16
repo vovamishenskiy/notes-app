@@ -156,6 +156,7 @@ h1 {
   height: auto;
   border-radius: 10px;
   padding: 6px 20px;
+  margin: 6px 0;
 }
 
 .header {
@@ -163,4 +164,15 @@ h1 {
   flex-direction: row;
   justify-content: center;
   margin: 0.5em;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-btn {
+  position: absolute;
+  right: 15px;
 }

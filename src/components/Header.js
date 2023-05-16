@@ -10,7 +10,7 @@ const Header = ({ text }) => {
         <div className="header-container">
             <h1 className="header">{text}</h1>
             {/* <button><img></img></button> todo: settings/logout button with icon */}
-            <button onClick={handleLogOutClick}>log out</button>
+            <button onClick={handleLogOutClick} className="logout-btn">log out</button>
             {logOutClick ? <Navigate to='/welcome' /> : ''}
         </div>
     )
