@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+
+body {
+  /* background-color: #FFF3EE; */
+  background-color: whitesmoke;
+}
+
+h1 {
+  margin: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+.header {
+  margin-top: 0;
+}
+
+.notes-container {
+  margin: 0.5em;
+}
+
+.notes-form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.notes-form {
+  display: flex;
+  align-items: center;
+}
+
+.notes-form #form-submit-btn,
+.notes-form input {
+  margin-right: 0.5em;
+}
+
+.notes-list {
+  width: 400px;
+  padding-left: 0.5em;
+  list-style: none;
+}
+
+.notes-list-item {
+  width: 400px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row-reverse;
+  padding: 0.5em;
+  margin: 0.7em 0.5em;
+  background: lightgray;
+  border-radius: 12px;
+  min-height: 25px;
+}
+
+.notes-list-item span {
+  width: 90%;
+  word-break: break-word;
+}
+
+.notes-container button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  border: 0;
+  background: skyblue;
+  color: white;
+  font-weight: 700;
+  width: auto;
+  height: 25px;
+  border-radius: 10px;
+}
+
+.form-text-input {
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  height: 30px;
+  border: 1px solid skyblue;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+.item-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  float: right;
+  height: 25px !important;
+  width: 25px !important;
+  padding: 0;
+  border-radius: 4px !important;
+}
+
+.item-btn svg {
+  fill: white;
+  width: 100%;
+}
+
+.item-popup {
+  position: relative;
+  left: 20px;
+  background: skyblue;
+  border-radius: 12px;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 5px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.note-item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 600px;
+}
+
+.item-popup span,
+.item-popup button {
+  font-family: 'Roboto', sans-serif;
+  color: darkslategray;
+  font-weight: 500;
+}
+
+.item-popup button {
+  border: 0.1px solid #f3f3f3;
+  margin: 0 5px;
+  background: #f3f3f3;
+}
+
+.notes-container button:hover {
+  filter: hue-rotate(35deg);
+}
+
+.item-popup button:hover {
+  filter: brightness(0.85);
+}
+
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signin-container input {
+  margin: 0.5em 0;
+}
+
+.signin-btn {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  border: 0;
+  background: skyblue;
+  color: white;
+  font-weight: 700;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  padding: 6px 20px;
+  margin: 6px 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0.5em;
+  margin-left: auto;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-btn {
+  height: auto!important;
+  display: flex;
+  padding: 5px 7px;
+  border-radius: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.settings-img {
+  width: 25px;
+}
+
+.settings-popup {
+  width: auto;
+  padding: 7px 14px;
+  border-radius: 24px;
+}
+
+.popup-content {
+  margin-top: 60px;
+  margin-left: 19px;
+}
