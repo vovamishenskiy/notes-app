@@ -2,7 +2,10 @@
   "name": "notes",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3010",
+  "options": {
+    "allowedHosts": ["localhost", ".localhost"],
+    "proxy": "http://localhost:3010/"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -25,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "json-server -p3001 --watch db.json",
-    "dev": "concurrently \" npm run server \" \" npm start --prefix ../backend \" \" npm start \""
+    "dev": "concurrently \" npm run server \" \" npm start \""
   },
   "eslintConfig": {
     "extends": [

@@ -8,6 +8,10 @@ const noteSchema = new mongoose.Schema(
         },
         content: {
             type: String,
+        },
+        important: {
+            type: boolean,
+            default: false
         }
     },
     { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
