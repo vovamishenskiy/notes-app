@@ -23,7 +23,6 @@ app.get('/', (req, res) => {
 app.post('/postNoteObject', jsonParser, async (req, res) => {
     try {
         const noteObject = req.body
-        console.log(noteObject)
 
         const newNote = new Note({
             id: noteObject.id,
@@ -51,11 +50,33 @@ app.get('/getNotes', async (req, res) => {
 
 app.delete('/deleteNote/:noteId', async (req, res) => {
     try {
-        const noteId = req.params
+        const noteId = req.params.noteId
         await Note.findByIdAndDelete(noteId)
         res.status(200).json({message: 'Note deleted successfully'})
     } catch(err) {
         console.error('error deleting note:', err)
+        res.status(500).json({message: 'Internal server error'})
+    }
+})
+
+app.put('/updateNote/:updateNoteId', jsonParser, async (req, res) => {
+    try {
+        const updateNoteId = req.params.updateNoteId
+        const updatedContent = req.body.content
+
+        const objectId = new mongoose.Types.ObjectId(updateNoteId)
+
+        const updatedNote = await Note.findByIdAndUpdate(
+            objectId,
+            {content: updatedContent},
+            {new: true}
+        )
+
+        if(!updatedNote) return res.status(404).json({message: 'Note not found'})
+
+        res.status(200).json({message: 'Note updated successfully', updatedNote})
+    } catch (err) {
+        console.error('error updating note:', err)
         res.status(500).json({message: 'Internal server error'})
     }
 })

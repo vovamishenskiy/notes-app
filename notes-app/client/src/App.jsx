@@ -1,46 +1,76 @@
 import { useEffect, useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
-import uniqid from 'uniqid'
+// import { debounce } from 'lodash' TODO: fix millions of requests every millisecond
 import './App.css'
+import { genRanHex } from './functions'
+import { NoteList, NoteInput } from './components'
 
 const App = () => {
   const [inputValue, setInputValue] = useState('')
   const [notes, setNotes] = useState([])
+  const [updateNoteContent, setUpdateNoteContent] = useState('')
+  const [updateNoteId, setUpdateNoteId] = useState('')
 
   const handleInputChange = (e) => setInputValue(e.target.value)
 
-  const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+  const handleNoteEdit = (noteId, content) => {
+    setUpdateNoteContent(content)
+    setUpdateNoteId(noteId)
+  }
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault()
+    e.preventDefault()
 
-      // const id = uniqid.process()
-      // console.log(typeof(id), id)
+    if (updateNoteId) {
+      try {
+        const updatedNote = {
+          id: updateNoteId,
+          content: updateNoteContent,
+        }
 
-      const noteObject = {
-        id: genRanHex(24),
-        content: inputValue
-      }
+        await fetch(`http://127.0.0.1:4242/updateNote/${updateNoteId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedNote)
+        })
 
-      await fetch('http://127.0.0.1:4242/postNoteObject', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/JSON' },
-        body: JSON.stringify(noteObject)
-      })
+        setUpdateNoteContent('')
+        setUpdateNoteId('')
+      } catch (err) { console.log(err) }
+    } else {
+      try {
+        const noteObject = {
+          id: genRanHex(24),
+          content: inputValue
+        }
 
-      setInputValue('')
-    } catch (err) { console.log(err) }
+        await fetch('http://127.0.0.1:4242/postNoteObject', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(noteObject)
+        })
+
+        setNotes((prevNotes) => [...prevNotes, noteObject])
+
+        setInputValue('')
+      } catch (err) { console.log(err) }
+    }
   }
 
   useEffect(() => {
     fetch('http://127.0.0.1:4242/getNotes', {
       method: 'GET',
-      headers: { 'Content-Type': 'application/JSON' },
-    }).then((res) => res.json())
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => res.json())
       .then((data) => setNotes(data))
       .catch((err) => console.error('error fetching notes: ', err))
   }, [notes])
+
+  // const debouncedFetchNotes = debounce(fetchNotes, 0)
+
+  // useEffect(() => {
+  //   debouncedFetchNotes()
+  // }, [])
 
   const deleteNote = async (noteId) => {
     try {
@@ -49,7 +79,8 @@ const App = () => {
       })
 
       if (response.ok) {
-        setNotes(notes.filter((note) => note._id !== noteId))
+        setNotes(notes.filter((note) => note.id !== noteId))
+        // setNotes((prevNotes) => prevNotes.filter((note) => note._id !== noteId))
       } else {
         console.error('error deleting note: ', response.status)
       }
@@ -58,28 +89,22 @@ const App = () => {
 
   return (
     <>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="inputValue">input: </label>
-          <input type="text" id='inputValue' value={inputValue} onChange={handleInputChange} />
-          <button type='submit'>save</button>
-        </form>
-      </div>
+      <NoteInput handleInputChange={handleInputChange} handleSubmit={handleSubmit} inputValue={inputValue} updateNoteId={updateNoteId} />
 
       {notes &&
+        <NoteList notes={notes} deleteNote={deleteNote} handleNoteEdit={handleNoteEdit} />
+      }
+
+      {updateNoteId &&
         <div>
-          <ul>
-            {notes.map((note) => (
-              <div key={note.id}>
-                {note.content}
-                <button onClick={() => deleteNote(note._id)}>delete note</button>
-              </div>
-            ))}
-          </ul>
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={updateNoteContent} onChange={(e) => setUpdateNoteContent(e.target.value)} />
+            <button type='submit'>update</button>
+            <button onClick={() => setUpdateNoteId('')}>cancel</button>
+          </form>
         </div>
       }
     </>
-
   )
 }
 
