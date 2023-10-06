@@ -12,10 +12,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  background-color: #f7f3f7;
 }
 
 body {
   margin: 1em;
+  background-color: #f7f3f7;
 }
 
 h1,

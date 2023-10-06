@@ -5,19 +5,23 @@
 }
 
 .note-input-form {
-    border: 1px solid red;
-    border-radius: 10px;
-    width: 70%;
-    height: 120px;
-    padding: 0 5px;
     display: flex;
     justify-content: left;
+    align-items: flex-start;
+    border: 2px solid #e7e7eb;
+    border-radius: 10px;
+    width: 50%;
+    height: 120px;
+    padding: 0 5px;
+    background-color: #fff;
 }
 
 .note-input-form #inputValue {
     border: 0;
-    height: 60%;
+    height: auto;
     width: 100%;
+    font-size: 15px;
+    margin: 2em 1em;
 }
 
 .note-input-form #inputValue:focus {
@@ -26,26 +30,56 @@
 
 .note-input-form button {
     height: fit-content;
-    margin: auto;
+    margin: 6.5em 0.5em 0 0;
 }
 
 /* note list */
 .note-list-wrapper {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .note-list {
-    width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     gap: 15px;
+    padding: 0 5px;
+    width: 50.65%;
 }
 
 .note-list-item {
-    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid #e7e7eb;
     border-radius: 10px;
-    padding: 5px;
-    width: 70%;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.note-list-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.note-list-item-btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* note update */
+.update-note-form {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.update-note-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

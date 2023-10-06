@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-// import { debounce } from 'lodash' TODO: fix millions of requests every millisecond
+import { debounce } from 'lodash' // TODO: fix millions of requests every millisecond
 import './App.css'
 import { genRanHex } from './functions'
 import { NoteList, NoteInput } from './components'
@@ -56,7 +56,17 @@ const App = () => {
     }
   }
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   fetch('http://127.0.0.1:4242/getNotes', {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => setNotes(data))
+  //     .catch((err) => console.error('error fetching notes: ', err))
+  // }, [notes])
+
+  const fetchNotes = () => {
     fetch('http://127.0.0.1:4242/getNotes', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -64,13 +74,13 @@ const App = () => {
       .then((res) => res.json())
       .then((data) => setNotes(data))
       .catch((err) => console.error('error fetching notes: ', err))
-  }, [notes])
+  }
 
-  // const debouncedFetchNotes = debounce(fetchNotes, 0)
+  const debouncedFetchNotes = debounce(fetchNotes, 0)
 
-  // useEffect(() => {
-  //   debouncedFetchNotes()
-  // }, [])
+  useEffect(() => {
+    debouncedFetchNotes()
+  }, [])
 
   const deleteNote = async (noteId) => {
     try {
@@ -89,20 +99,10 @@ const App = () => {
 
   return (
     <>
-      <NoteInput handleInputChange={handleInputChange} handleSubmit={handleSubmit} inputValue={inputValue} updateNoteId={updateNoteId} />
+      <NoteInput handleInputChange={handleInputChange} handleSubmit={handleSubmit} inputValue={inputValue} />
 
       {notes &&
-        <NoteList notes={notes} deleteNote={deleteNote} handleNoteEdit={handleNoteEdit} />
-      }
-
-      {updateNoteId &&
-        <div>
-          <form onSubmit={handleSubmit}>
-            <input type="text" value={updateNoteContent} onChange={(e) => setUpdateNoteContent(e.target.value)} />
-            <button type='submit'>update</button>
-            <button onClick={() => setUpdateNoteId('')}>cancel</button>
-          </form>
-        </div>
+        <NoteList notes={notes} deleteNote={deleteNote} handleNoteEdit={handleNoteEdit} updateNoteId={updateNoteId} handleSubmit={handleSubmit} updateNoteContent={updateNoteContent} setUpdateNoteContent={setUpdateNoteContent} setUpdateNoteId={setUpdateNoteId} />
       }
     </>
   )
