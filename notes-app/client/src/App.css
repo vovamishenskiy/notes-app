@@ -1,0 +1,51 @@
+/* note input */
+.note-input-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.note-input-form {
+    border: 1px solid red;
+    border-radius: 10px;
+    width: 70%;
+    height: 120px;
+    padding: 0 5px;
+    display: flex;
+    justify-content: left;
+}
+
+.note-input-form #inputValue {
+    border: 0;
+    height: 60%;
+    width: 100%;
+}
+
+.note-input-form #inputValue:focus {
+    outline: none;
+}
+
+.note-input-form button {
+    height: fit-content;
+    margin: auto;
+}
+
+/* note list */
+.note-list-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.note-list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.note-list-item {
+    border: 1px solid red;
+    border-radius: 10px;
+    padding: 5px;
+    width: 70%;
+}
